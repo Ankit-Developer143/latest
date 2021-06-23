@@ -1,0 +1,66 @@
+
+
+
+<div class="course-details" style="display: flex;">
+  <mat-card style="width: 50%;">
+      <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
+          <mat-card-content>
+              <mat-form-field>
+                  <input matInput placeholder="Name" type="text" name="name" required
+                      [(ngModel)]="selectedCourse.name" />
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Position" type="text" name="position"
+                      [(ngModel)]="selectedCourse.position" />
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Office" type="text" name="office"
+                      [(ngModel)]="selectedCourse.office" />
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Salary" type="text" name="salary"
+                    [(ngModel)]="selectedCourse.salary" />
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+              <button [disabled]="form.invalid" type="submit" mat-button color="primary">
+                  Submit
+              </button>
+              <button type="button" mat-button (click)="resetForm(form)">Reset</button>
+          </mat-card-actions>
+      </form>
+  </mat-card>
+  <mat-card>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sr.No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Position</th>
+          <th scope="col">Office</th>
+          <th scope="col">Salary</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of employeeData let i = index" (click)="selectCourse(item)">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.position}}</td>
+          <td>{{item.office}}</td>
+          <td>{{item.salary}}</td>
+          <td>
+            <div class="action-btn">
+              <i class="material-icons" (click)="saveCourse(selectedCourse)">edit</i>
+            </div>
+          </td>
+          <td><div class="action-btn">
+            <i class="material-icons" (click)="deleteCourse(item._id); $event.stopImmediatePropagation()">delete</i>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>
+
